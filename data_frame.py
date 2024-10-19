@@ -1,40 +1,50 @@
+# %% Initialize the Spark session
 import findspark
 findspark.init()
 
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
+
 import os
 
-from utils.data_creation import load_data
+from utils.data_struct_init import final_struct, columns_to_analyze
 
-# Load the data path
-base_path = r"C:\Users\sachi\pyspark_tutorial\muse_pipeline\Telepathic-Navigation\muse_dataset"
-body_parts = [(0,"Right_hand"), (1,"Left_hand"), (2,"Right_leg"), (3,"Left_leg")]
+from utils.data_creation import load_data, combined_dataset, average_out_timesteps
 
+spark = SparkSession.builder \
+    .appName("EEG_Analysis") \
+    .master("local[*]") \
+    .getOrCreate()
+
+'''
+Add location data to be used for the analysis
+'''
+base_path = r"C:\Users\sachi\pyspark_tutorial\muse_pipeline\Telepathic-Navigation\muse_dataset\Trial_2"
+body_parts = [(0,"Right_hand"), (1,"Left_hand")]
 
 # Load data for each body part
 data_dict = {}
 for index, part in body_parts:
     folder_path = os.path.join(base_path, part)
-    data_dict[part] = load_data(index, folder_path, part)
+    data_dict[part] = load_data(index, folder_path, part, spark, final_struct)
 
-#  Select relevant columns and drop NA values
-columns_to_analyze = [
-    "TimeStamp","Delta_TP9", "Delta_AF7", "Delta_AF8", "Delta_TP10",
-    "Theta_TP9", "Theta_AF7", "Theta_AF8", "Theta_TP10",
-    "Alpha_TP9", "Alpha_AF7", "Alpha_AF8", "Alpha_TP10",
-    "Beta_TP9", "Beta_AF7", "Beta_AF8", "Beta_TP10",
-    "Gamma_TP9", "Gamma_AF7", "Gamma_AF8", "Gamma_TP10", "label"
-]
+# Show the shape of each DataFrame
+for part, df in data_dict.items():
+    print(f"{part} shape: {df.count(), len(df.columns)}")
 
-# Creating dataframes for each body part (Pandas)
-right_hand_pd = data_dict["Right_hand"].select(columns_to_analyze).dropna().toPandas()
-left_hand_pd = data_dict["Left_hand"].select(columns_to_analyze).dropna().toPandas()
-right_leg_pd = data_dict["Right_leg"].select(columns_to_analyze).dropna().toPandas()
-left_leg_pd = data_dict["Left_leg"].select(columns_to_analyze).dropna().toPandas()
+# %% Combine the data from all body parts
 
-# Creating dataframes for each body part (Spark)
-right_hand_pd = data_dict["Right_hand"].select(columns_to_analyze).dropna()
-left_hand_pd = data_dict["Left_hand"].select(columns_to_analyze).dropna()
-right_leg_pd = data_dict["Right_leg"].select(columns_to_analyze).dropna()
-left_leg_pd = data_dict["Left_leg"].select(columns_to_analyze).dropna()
+combined_dataset = combined_dataset(data_dict)
+
+granularity = 100 # Chose this granularity as per TimeStamp column increments
+
+aggregated_dataset = average_out_timesteps(combined_dataset, columns_to_analyze, granularity)
+
+# %% Save the file to csv format
+
+# Define the output path
+output_path = r"C:\Users\sachi\pyspark_tutorial\muse_pipeline\Telepathic-Navigation\muse_dataset\Trial_2\combined_data.csv"
+
+pandas_df = aggregated_dataset.toPandas()
+
+# Save the DataFrame to a CSV file
+pandas_df.to_csv(output_path, index=False)

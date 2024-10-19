@@ -7,6 +7,9 @@ from pyspark.sql.functions import lit
 from pyspark.sql import functions as F
 
 from pyspark.sql.window import Window
+
+from pyspark.sql.types import *
+
 """
 Load data from a folder containing multiple CSV files.
 """
@@ -58,7 +61,6 @@ def combined_dataset(data_dict):
     dataset = combined_data.withColumn("TimeStamp", F.date_format("TimeStamp", "ss.SSS").cast(DoubleType()))
 
     start_time = dataset.select('TimeStamp').collect()[0][0]
-    end_time = dataset.select('TimeStamp').collect()[-1][0]
 
     # Step 3: Calculate the difference in milliseconds from the minimum timestamp
     dataset = dataset.withColumn("TimeStamp",  F.round(F.col("TimeStamp") - F.lit(start_time), 3))

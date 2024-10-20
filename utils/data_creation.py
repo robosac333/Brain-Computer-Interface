@@ -33,7 +33,7 @@ def load_data(index, folder_path, part, spark, final_struct):
     combined_df = combined_df.withColumn("label", lit(index))
     return combined_df
 
-# %% Combine the data from all body parts
+## %% Combine the data from all body parts
 
 def combined_dataset(data_dict):
     # Initialize a variable to hold the combined DataFrame
@@ -67,34 +67,30 @@ def combined_dataset(data_dict):
 
     return dataset
 
-# %% Average the concerned columns
+## %% Average the concerned columns
+def average_out_timesteps(combined_dataset, columns_to_analyze, granularity):
 
-def average_out_timesteps(dataset, columns_to_analyze, granularity):
-    # Create a window
-    window_spec = Window.orderBy('TimeStamp').rowsBetween(0, granularity)
+    # Create a column to identify the window each row belongs to
+    windowed_dataset = combined_dataset.withColumn(
+        'WindowID', 
+        F.floor(F.row_number().over(Window.orderBy('TimeStamp')) / granularity)
+    )
 
-    # Bucket the data by the time interval (granularity)
-    dataset = dataset.withColumn('TimeBucket', (F.col('TimeStamp') * 1000).cast('int'))
+    # Group by WindowID and calculate averages
+    aggregated_dataset = windowed_dataset.groupBy('WindowID').agg(
+        *[F.avg(col).alias(f'avg_{col}') for col in columns_to_analyze]
+    )
 
-    # Group by the buckets and calculate the average for each bucket
-    aggregations = {col: 'avg' for col in columns_to_analyze if col != 'TimeStamp'}
-    aggregations['TimeStamp'] = 'first'  # Keep the first TimeStamp for each bucket
+    # Sort by WindowID to maintain the original order
+    aggregated_dataset = aggregated_dataset.orderBy('WindowID')
 
-    # # Group by the buckets and calculate the average for each bucket
-    # aggregations = {col: 'avg' for col in columns_to_analyze[1:]}
-    agg_dataset = dataset.groupBy('TimeBucket').agg(aggregations)
+    aggregated_dataset = aggregated_dataset.withColumn('WindowID', F.round(F.col('WindowID') / 10, 3))
 
-    # Rename the columns to remove "avg()" and "first()"
-    for col in columns_to_analyze:
-        if col != 'TimeStamp':
-            agg_dataset = agg_dataset.withColumnRenamed(f'avg({col})', col)
-        else:
-            agg_dataset = agg_dataset.withColumnRenamed(f'first({col})', col)
+    aggregated_dataset =  aggregated_dataset.withColumnRenamed('WindowID', 'TimeStamp')
 
-    # Drop the TimeBucket column and reassign the DataFrame
-    agg_dataset = agg_dataset.drop('TimeBucket')
+    # Convert column names back to original names
+    for col in columns_to_analyze[1:]:
+        aggregated_dataset = aggregated_dataset.withColumnRenamed(f'avg_{col}', col)
+    aggregated_dataset = aggregated_dataset.drop('avg_TimeStamp')
 
-    # Sort the aggregated dataset by TimeStamp to maintain order
-    agg_dataset = agg_dataset.orderBy('TimeStamp')
-
-    return agg_dataset
+    return aggregated_dataset

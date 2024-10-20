@@ -31,13 +31,18 @@ for index, part in body_parts:
 for part, df in data_dict.items():
     print(f"{part} shape: {df.count(), len(df.columns)}")
 
-# %% Combine the data from all body parts
-
+## %% Combine the data from all body parts
 combined_dataset = combined_dataset(data_dict)
 
-granularity = 100 # Chose this granularity as per TimeStamp column increments
+combined_dataset.cache()
+# %% Show the aggregated DataFrame
+granularity = 50 # Chose this granularity as per TimeStamp column increments
 
 aggregated_dataset = average_out_timesteps(combined_dataset, columns_to_analyze, granularity)
+
+aggregated_dataset.show()
+# %% Save the file to csv format
+print(aggregated_dataset.count(), len(aggregated_dataset.columns))
 
 # %% Save the file to csv format
 

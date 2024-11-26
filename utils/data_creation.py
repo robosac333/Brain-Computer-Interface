@@ -13,7 +13,7 @@ from pyspark.sql.types import *
 """
 Load data from a folder containing multiple CSV files.
 """
-def load_data(index, folder_path, part, spark, final_struct):
+def load_data(index, folder_path, part, spark, data_schema):
 
     csv_files = [f for f in os.listdir(folder_path) if f.endswith('.csv')]
     # Initialize an empty list to store individual DataFrames
@@ -21,7 +21,7 @@ def load_data(index, folder_path, part, spark, final_struct):
     # Read each CSV file and create a DataFrame
     for file in csv_files:
         file_path = os.path.join(folder_path, file)
-        df = spark.read.csv(file_path, header=True, schema=final_struct).dropna()
+        df = spark.read.csv(file_path, header=True, schema=StructType(fields=data_schema[:-1])).dropna()
         # df.shape = (df.count(), len(df.columns))
         # print(f"Loaded {file} of {part} with shape {df.shape}")
         dfs.append(df)
@@ -58,14 +58,15 @@ def combined_dataset(data_dict):
     
     # Assuming 'df' is your DataFrame and 'timestamp_col' is the name of your timestamp column
     # Convert the timestamp to ss.SSS format
-    dataset = combined_data.withColumn("TimeStamp", F.date_format("TimeStamp", "ss.SSS").cast(DoubleType()))
+    if "TimeStamp" in combined_data.columns and combined_data.schema["TimeStamp"].dataType.typeName() == "timestamp":
+        combined_data = combined_data.withColumn("TimeStamp", F.date_format("TimeStamp", "ss.SSS").cast(DoubleType()))
 
-    start_time = dataset.select('TimeStamp').collect()[0][0]
+        start_time = combined_data.select('TimeStamp').collect()[0][0]
 
-    # Step 3: Calculate the difference in milliseconds from the minimum timestamp
-    dataset = dataset.withColumn("TimeStamp",  F.round(F.col("TimeStamp") - F.lit(start_time), 3))
+        # Step 3: Calculate the difference in milliseconds from the minimum timestamp
+        combined_data = combined_data.withColumn("TimeStamp",  F.round(F.col("TimeStamp") - F.lit(start_time), 3))
 
-    return dataset
+    return combined_data
 
 ## %% Average the concerned columns
 def average_out_timesteps(combined_dataset, columns_to_analyze, granularity):
@@ -73,18 +74,30 @@ def average_out_timesteps(combined_dataset, columns_to_analyze, granularity):
     # Create a column to identify the window each row belongs to
     windowed_dataset = combined_dataset.withColumn(
         'WindowID', 
-        F.floor(F.row_number().over(Window.orderBy('TimeStamp')) / granularity)
+        F.floor(F.row_number().over(Window.orderBy(F.lit(1))) / granularity)
     )
 
+    # windowed_dataset.show()
     # Group by WindowID and calculate averages
     aggregated_dataset = windowed_dataset.groupBy('WindowID').agg(
         *[F.avg(col).alias(f'avg_{col}') for col in columns_to_analyze]
     )
 
-    # Sort by WindowID to maintain the original order
-    aggregated_dataset = aggregated_dataset.orderBy('WindowID')
+  
+    # Create a window spec partitioned by WindowID and ordered by TimeStamp
+    # window_spec = Window.partitionBy('WindowID').orderBy(F.col('TimeStamp').asc())
+    
+    # # Select the last row in each window using row_number
+    # aggregated_dataset = windowed_dataset.withColumn(
+    #     'row_num', 
+    #     F.row_number().over(window_spec)
+    # ).filter(F.col('row_num') == 1).drop('row_num')
 
-    aggregated_dataset = aggregated_dataset.withColumn('WindowID', F.round(F.col('WindowID') / 10, 3))
+    # Sort by WindowID to maintain the original order
+    # aggregated_dataset = aggregated_dataset.orderBy('WindowID')
+
+    # aggregated_dataset = aggregated_dataset.withColumn('WindowID', F.round(F.col('WindowID') / 10, 3))
+    aggregated_dataset = aggregated_dataset.drop('TimeStamp')
 
     aggregated_dataset =  aggregated_dataset.withColumnRenamed('WindowID', 'TimeStamp')
 
@@ -93,4 +106,36 @@ def average_out_timesteps(combined_dataset, columns_to_analyze, granularity):
         aggregated_dataset = aggregated_dataset.withColumnRenamed(f'avg_{col}', col)
     aggregated_dataset = aggregated_dataset.drop('avg_TimeStamp')
 
+    # aggregated_dataset = aggregated_dataset.withColumn("label", F.col("label").cast("integer"))
+
     return aggregated_dataset
+
+# def average_out_timesteps(combined_dataset, columns_to_analyze, granularity):
+
+#     # Create a column to identify the window each row belongs to
+#     windowed_dataset = combined_dataset.withColumn(
+#         'WindowID', 
+#         F.floor(F.row_number().over(Window.orderBy('TimeStamp')) / granularity)
+#     )
+
+#     # windowed_dataset.show()
+#     # Group by WindowID and calculate averages
+#     # aggregated_dataset = windowed_dataset.groupBy('WindowID').agg(
+#     #     *[F.avg(col).alias(f'avg_{col}') for col in columns_to_analyze]
+#     # )
+
+#     # Sort by WindowID to maintain the original order
+#     # aggregated_dataset = aggregated_dataset.orderBy('WindowID')
+
+#     # aggregated_dataset = aggregated_dataset.withColumn('WindowID', F.round(F.col('WindowID') / 10, 3))
+
+#     aggregated_dataset =  aggregated_dataset.withColumnRenamed('WindowID', 'TimeStamp')
+
+#     # Convert column names back to original names
+#     for col in columns_to_analyze[1:]:
+#         aggregated_dataset = aggregated_dataset.withColumnRenamed(f'avg_{col}', col)
+#     aggregated_dataset = aggregated_dataset.drop('avg_TimeStamp')
+
+#     # aggregated_dataset = aggregated_dataset.withColumn("label", F.col("label").cast("integer"))
+
+#     return aggregated_dataset

@@ -46,6 +46,11 @@ brain_control_ws/
        └── README.md
 
 ```
+## Potential ROS2 Workflow
+
+![Screenshot from 2024-11-27 03-19-23](https://github.com/user-attachments/assets/e3f2f6b0-fd9d-4392-9f0f-13c6598b5c43)
+
+---
 
 ## Right hand Sample data
 ![image](https://github.com/user-attachments/assets/51246e3d-29a7-4829-9b88-26f35c698826)

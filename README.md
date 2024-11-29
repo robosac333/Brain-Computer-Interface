@@ -17,8 +17,8 @@ ROS2 Tool that leverages on ML to control a mobile robot using EEG Signals from 
 ## Overview
 
 The package consists of two main nodes:
-- **BCI Node**: Processes brain-computer interface signals and publishes commands
-- **Robot Controller Node**: Converts BCI commands into robot movement commands
+- **bci_pub_node**: Processes brain-computer interface signals and publishes commands
+- **robot_cont_node**: Converts BCI commands into robot movement commands
 
 ## Prerequisites
 

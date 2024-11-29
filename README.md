@@ -62,7 +62,7 @@ cd ..
 # Terminal 1
 ros2 run bci_package bci_node
 
-#Terminal
+# Termina 2
 ros2 run bci_package robot_cont_node
 
 ```

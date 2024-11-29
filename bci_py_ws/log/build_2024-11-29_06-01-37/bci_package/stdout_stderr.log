@@ -1,0 +1,26 @@
+running egg_info
+writing ../../build/bci_package/bci_package.egg-info/PKG-INFO
+writing dependency_links to ../../build/bci_package/bci_package.egg-info/dependency_links.txt
+writing entry points to ../../build/bci_package/bci_package.egg-info/entry_points.txt
+writing requirements to ../../build/bci_package/bci_package.egg-info/requires.txt
+writing top-level names to ../../build/bci_package/bci_package.egg-info/top_level.txt
+reading manifest file '../../build/bci_package/bci_package.egg-info/SOURCES.txt'
+writing manifest file '../../build/bci_package/bci_package.egg-info/SOURCES.txt'
+running build
+running build_py
+copying bci_package/robot_cont_node.py -> /home/kashif/HRI/bci_py_ws/build/bci_package/build/lib/bci_package
+copying bci_package/bci_pub_node.py -> /home/kashif/HRI/bci_py_ws/build/bci_package/build/lib/bci_package
+running install
+running install_lib
+copying /home/kashif/HRI/bci_py_ws/build/bci_package/build/lib/bci_package/robot_cont_node.py -> /home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+copying /home/kashif/HRI/bci_py_ws/build/bci_package/build/lib/bci_package/bci_pub_node.py -> /home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+byte-compiling /home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/robot_cont_node.py to robot_cont_node.cpython-310.pyc
+byte-compiling /home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/bci_pub_node.py to bci_pub_node.cpython-310.pyc
+running install_data
+running install_egg_info
+removing '/home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package-0.0.0-py3.10.egg-info' (and everything under it)
+Copying ../../build/bci_package/bci_package.egg-info to /home/kashif/HRI/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package-0.0.0-py3.10.egg-info
+running install_scripts
+Installing bci_pub_node script to /home/kashif/HRI/bci_py_ws/install/bci_package/lib/bci_package
+Installing robot_cont_node script to /home/kashif/HRI/bci_py_ws/install/bci_package/lib/bci_package
+writing list of installed files to '/home/kashif/HRI/bci_py_ws/build/bci_package/install.log'

@@ -3,7 +3,7 @@ ROS2 Tool that leverages on ML to control a mobile robot using EEG Signals from 
 
 ---
 
-[![Watch the video](https://drive.google.com/uc?export=view&id=1qfHqdFfhhepSQcuvOsCuSEO_Po57E_6u)](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
+[Watch the video here](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
 
 ---
 

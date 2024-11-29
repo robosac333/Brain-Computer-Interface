@@ -1,7 +1,15 @@
 # Telepathic Navigation
 ROS2 Tool that leverages on ML to control a mobile robot using EEG Signals from human brain captured using Muse2 headband and passed the classification filters including ROS2 nodes for being categorized into robot interpretable signals for its locomotions. 
 
-[![Watch the video](https://via.placeholder.com/500)](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
+---
+
+[![Watch the video](https://drive.google.com/uc?export=view&id=1qfHqdFfhhepSQcuvOsCuSEO_Po57E_6u)](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
+
+---
+
+## Potential ROS2 package Workflow
+
+![Screenshot from 2024-11-27 03-19-23](https://github.com/user-attachments/assets/e3f2f6b0-fd9d-4392-9f0f-13c6598b5c43)
 
 ---
 
@@ -18,7 +26,7 @@ The package consists of two main nodes:
 - Ubuntu 22.04 (recommended)
 
 ## Package Structure
-
+```
 bci_package/
 ├── bci_package/
 │ ├── init.py
@@ -27,6 +35,7 @@ bci_package/
 ├── package.xml
 ├── setup.cfg
 └── setup.py
+```
 
 ## Installation
 
@@ -57,11 +66,7 @@ ros2 run bci_package robot_cont_node
 
 ```
 
-## Potential ROS2 package Workflow
 
-![Screenshot from 2024-11-27 03-19-23](https://github.com/user-attachments/assets/e3f2f6b0-fd9d-4392-9f0f-13c6598b5c43)
-
----
 
 ## Right hand Sample data
 ![image](https://github.com/user-attachments/assets/51246e3d-29a7-4829-9b88-26f35c698826)

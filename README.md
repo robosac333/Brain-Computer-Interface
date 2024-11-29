@@ -2,6 +2,7 @@
 ROS2 Tool that leverages on ML to control a mobile robot using EEG Signals from human brain captured using Muse2 headband and passed the classification filters including ROS2 nodes for being categorized into robot interpretable signals for its locomotions. 
 
 ---
+## Video
 
 [Watch the video here](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
 

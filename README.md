@@ -1,52 +1,63 @@
 # Telepathic Navigation
- Software that controls an automotive based on EEG Frequencies in the mind. The live data stream is passed through PCA to get essential information and Decision Tree classifies the required action accordingly
+ROS2 Tool that leverages on ML to control a mobile robot using EEG Signals from human brain captured using Muse2 headband and passed the classification filters including ROS2 nodes for being categorized into robot interpretable signals for its locomotions. 
 
-## Potential ROS2 Workspace Structure
-```
+[![Watch the video](https://via.placeholder.com/500)](https://drive.google.com/file/d/11Xi9w9rxSH7TQ3aWLNLaZWAVFkjOsF50/view?usp=sharing)
 
-brain_control_ws/
-├── src/
-│   ├── brain_control_interfaces/         # Custom message/service definitions if needed
-│   │   ├── msg/
-│   │   │   └── BrainCommand.msg         # Custom message type for brain signals
-│   │   ├── CMakeLists.txt
-│   │   └── package.xml
-│   │
-│   └── brain_control_robot/             # Main C++ package
-│       ├── include/
-│       │   └── brain_control_robot/
-│       │       ├── brain_control_node.hpp
-│       │       ├── model/
-│       │       │   └── model_interface.hpp   # Interface to ML model
-│       │       └── utils/
-│       │           └── data_processor.hpp    # Signal processing utilities
-│       │
-│       ├── src/
-│       │   ├── brain_control_node.cpp
-│       │   ├── model/
-│       │   │   └── model_interface.cpp
-│       │   └── utils/
-│       │       └── data_processor.cpp
-│       │
-│       ├── config/
-│       │   └── params.yaml               # Configuration parameters
-│       │
-│       ├── launch/
-│       │   └── brain_control.launch.py   # Launch file
-│       │
-│       ├── model/                        # Directory for ML model files
-│       │   └── saved_model/              # Trained model weights/parameters
-│       │
-│       ├── test/                         # Unit tests
-│       │   ├── test_brain_control.cpp
-│       │   └── test_main.cpp
-│       │
-│       ├── CMakeLists.txt
-│       ├── package.xml
-       └── README.md
+---
+
+## Overview
+
+The package consists of two main nodes:
+- **BCI Node**: Processes brain-computer interface signals and publishes commands
+- **Robot Controller Node**: Converts BCI commands into robot movement commands
+
+## Prerequisites
+
+- ROS2 (Humble or newer recommended)
+- Python 3.8+
+- Ubuntu 22.04 (recommended)
+
+## Package Structure
+
+bci_package/
+├── bci_package/
+│ ├── init.py
+│ ├── bci_node.py # BCI signal processing node
+│ └── robot_cont_node.py # Robot controller node
+├── package.xml
+├── setup.cfg
+└── setup.py
+
+## Installation
 
 ```
-## Potential ROS2 Workflow
+
+mkdir -p bci_py_ws/src
+cd bci_py_ws/src
+# clone the repo here
+
+```
+## Build the package
+
+```
+cd ..
+colcon build
+source install/setup.bash
+```
+## Running the package
+
+```
+cd ..
+
+# Terminal 1
+ros2 run bci_package bci_node
+
+#Terminal
+ros2 run bci_package robot_cont_node
+
+```
+
+## Potential ROS2 package Workflow
 
 ![Screenshot from 2024-11-27 03-19-23](https://github.com/user-attachments/assets/e3f2f6b0-fd9d-4392-9f0f-13c6598b5c43)
 

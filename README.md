@@ -62,12 +62,12 @@ cd ..
 # Terminal 1
 ros2 run bci_package bci_node
 
-# Termina 2
+# Terminal 2
 ros2 run bci_package robot_cont_node
 
 ```
 
-
+# Muse2 EEG DATA
 
 ## Right hand Sample data
 ![image](https://github.com/user-attachments/assets/51246e3d-29a7-4829-9b88-26f35c698826)

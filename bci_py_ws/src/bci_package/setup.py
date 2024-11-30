@@ -12,9 +12,19 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # Include weights directory
+        (os.path.join('share', package_name, 'weights'), glob('weights/*.pkl')),
     ],
-    install_requires=['setuptools'],
-    zip_safe=True,
+    package_data={
+        package_name: ['weights/*.pkl'],  # Include pickle files in the package
+    },
+    install_requires=[
+        'setuptools',
+        'numpy',
+        'pandas',
+        'scikit-learn',
+    ],
+    zip_safe=False,  # Changed to False because we have package data
     maintainer='Kashif Ansari',
     maintainer_email='kansari@umd.edu',
     description='ROS2 package for BCI control of Nova Carter',
@@ -23,7 +33,8 @@ setup(
     entry_points={
         'console_scripts': [
             'bci_pub_node = bci_package.bci_pub_node:main',
-            'robot_cont_node = bci_package.robot_cont_node:main'
+            'robot_cont_node = bci_package.robot_cont_node:main',
+            'model_decision = bci_package.model_decision:main'            
         ],
     },
 )

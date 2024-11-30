@@ -1,4 +1,0 @@
-[console_scripts]
-bci_pub_node = bci_package.bci_pub_node:main
-robot_cont_node = bci_package.robot_cont_node:main
-

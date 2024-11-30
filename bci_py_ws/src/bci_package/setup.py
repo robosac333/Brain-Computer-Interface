@@ -23,18 +23,23 @@ setup(
         'numpy',
         'pandas',
         'scikit-learn',
+        'matplotlib',
     ],
     zip_safe=False,  # Changed to False because we have package data
     maintainer='Kashif Ansari',
     maintainer_email='kansari@umd.edu',
     description='ROS2 package for BCI control of Nova Carter',
     license='Apache License 2.0',
-    tests_require=['pytest'],
+    extras_require={
+        'test': ['pytest'],  # Changed from tests_require to extras_require
+    },
     entry_points={
         'console_scripts': [
             'bci_pub_node = bci_package.bci_pub_node:main',
             'robot_cont_node = bci_package.robot_cont_node:main',
-            'model_decision = bci_package.model_decision:main'            
+            'model_decision = bci_package.model_decision:main',
+            'bci_predictor = bci_package.detection:main',
+            'bci_publisher = bci_package.bci_publisher:main'
         ],
     },
 )

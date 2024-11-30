@@ -1,0 +1,8 @@
+setuptools
+numpy
+pandas
+scikit-learn
+matplotlib
+
+[test]
+pytest

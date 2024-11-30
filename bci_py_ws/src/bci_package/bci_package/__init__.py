@@ -6,4 +6,3 @@ control of robotic systems using ROS2.
 """
 from .models import VotingEnsemble
 
-

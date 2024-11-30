@@ -1,0 +1,61 @@
+[0.370s] Invoking command in '/home/abhishek/Brain-Computer-Interface/bci_py_ws/src/bci_package': PYTHONPATH=/home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/prefix_override:/home/abhishek/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/bci_package build --build-base /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build install --record /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/install.log --single-version-externally-managed install_data
+[0.500s] running egg_info
+[0.501s] creating ../../build/bci_package/bci_package.egg-info
+[0.508s] writing ../../build/bci_package/bci_package.egg-info/PKG-INFO
+[0.508s] writing dependency_links to ../../build/bci_package/bci_package.egg-info/dependency_links.txt
+[0.509s] writing entry points to ../../build/bci_package/bci_package.egg-info/entry_points.txt
+[0.509s] writing requirements to ../../build/bci_package/bci_package.egg-info/requires.txt
+[0.509s] writing top-level names to ../../build/bci_package/bci_package.egg-info/top_level.txt
+[0.509s] writing manifest file '../../build/bci_package/bci_package.egg-info/SOURCES.txt'
+[0.525s] reading manifest file '../../build/bci_package/bci_package.egg-info/SOURCES.txt'
+[0.526s] writing manifest file '../../build/bci_package/bci_package.egg-info/SOURCES.txt'
+[0.526s] running build
+[0.526s] running build_py
+[0.526s] creating /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.526s] copying bci_package/model_decision.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.526s] copying bci_package/robot_cont_node.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.526s] copying bci_package/models.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.526s] copying bci_package/detection.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] copying bci_package/model_inference.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] copying bci_package/test_predictions.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] copying bci_package/bci_pub_node.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] copying bci_package/__init__.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] copying bci_package/bci_publisher.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package
+[0.527s] running install
+[0.530s] running install_lib
+[0.538s] creating /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.538s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/model_decision.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.538s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/robot_cont_node.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.538s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/models.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.538s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/detection.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.538s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/model_inference.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.539s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/test_predictions.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.539s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/bci_pub_node.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.539s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/__init__.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.539s] copying /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build/lib/bci_package/bci_publisher.py -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package
+[0.539s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/model_decision.py to model_decision.cpython-310.pyc
+[0.540s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/robot_cont_node.py to robot_cont_node.cpython-310.pyc
+[0.540s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/models.py to models.cpython-310.pyc
+[0.540s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/detection.py to detection.cpython-310.pyc
+[0.541s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/model_inference.py to model_inference.cpython-310.pyc
+[0.542s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/test_predictions.py to test_predictions.cpython-310.pyc
+[0.542s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/bci_pub_node.py to bci_pub_node.cpython-310.pyc
+[0.542s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/__init__.py to __init__.cpython-310.pyc
+[0.542s] byte-compiling /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package/bci_publisher.py to bci_publisher.cpython-310.pyc
+[0.542s] running install_data
+[0.542s] creating /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/ament_index/resource_index/packages
+[0.542s] copying resource/bci_package -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/ament_index/resource_index/packages
+[0.542s] copying package.xml -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/bci_package
+[0.543s] creating /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/bci_package/weights
+[0.543s] copying weights/ensemble_model.pkl -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/bci_package/weights
+[0.552s] copying weights/scaler.pkl -> /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/share/bci_package/weights
+[0.552s] running install_egg_info
+[0.560s] Copying ../../build/bci_package/bci_package.egg-info to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages/bci_package-0.0.0-py3.10.egg-info
+[0.560s] running install_scripts
+[0.627s] Installing bci_predictor script to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/bci_package
+[0.627s] Installing bci_pub_node script to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/bci_package
+[0.627s] Installing bci_publisher script to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/bci_package
+[0.627s] Installing model_decision script to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/bci_package
+[0.627s] Installing robot_cont_node script to /home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/bci_package
+[0.627s] writing list of installed files to '/home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/install.log'
+[0.641s] Invoked command in '/home/abhishek/Brain-Computer-Interface/bci_py_ws/src/bci_package' returned '0': PYTHONPATH=/home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/prefix_override:/home/abhishek/.local/lib/python3.10/site-packages/colcon_core/task/python/colcon_distutils_commands:/home/abhishek/Brain-Computer-Interface/bci_py_ws/install/bci_package/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated setup.py egg_info --egg-base ../../build/bci_package build --build-base /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/build install --record /home/abhishek/Brain-Computer-Interface/bci_py_ws/build/bci_package/install.log --single-version-externally-managed install_data
